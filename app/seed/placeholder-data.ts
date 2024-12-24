@@ -1,0 +1,7 @@
+const placeholderData = [
+  { name: 'John Doe', email: 'john.doe@example.com' },
+  { name: 'Jane Smith', email: 'jane.smith@example.com' },
+  { name: 'Alice Johnson', email: 'alice.johnson@example.com' },
+];
+
+export default placeholderData;
