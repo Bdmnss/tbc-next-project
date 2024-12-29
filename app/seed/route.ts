@@ -1,8 +1,18 @@
-import { NextResponse } from 'next/server';
-import { Client } from 'pg';
-import placeholderData from './placeholder-data';
+import { NextResponse } from "next/server";
+import { Client } from "pg";
 
-export async function GET() {
+export async function POST(request: Request) {
+  const formData = await request.formData();
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+
+  if (!name || !email) {
+    return NextResponse.json(
+      { message: "Name and email are required" },
+      { status: 400 }
+    );
+  }
+
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
   });
@@ -10,24 +20,18 @@ export async function GET() {
   await client.connect();
 
   try {
-    await client.query(`
-      CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
-        name VARCHAR(100),
-        email VARCHAR(100) UNIQUE
-      );
-    `);
-
-    const insertPromises = placeholderData.map(user =>
-      client.query('INSERT INTO users (name, email) VALUES ($1, $2) ON CONFLICT (email) DO NOTHING', [user.name, user.email])
+    await client.query(
+      "INSERT INTO users (name, email) VALUES ($1, $2) ON CONFLICT (email) DO NOTHING",
+      [name, email]
     );
 
-    await Promise.all(insertPromises);
-
-    return NextResponse.json({ message: 'Database seeded successfully' });
+    return NextResponse.redirect("/invoices");
   } catch (error) {
-    console.error('Error seeding database:', error);
-    return NextResponse.json({ message: 'Error seeding database' }, { status: 500 });
+    console.error("Error inserting data:", error);
+    return NextResponse.json(
+      { message: "Error inserting data" },
+      { status: 500 }
+    );
   } finally {
     await client.end();
   }
