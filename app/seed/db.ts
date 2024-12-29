@@ -8,7 +8,7 @@ export async function connectToDatabase() {
   }
 
   const client = new Client({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.POSTGRES_PRISMA_URL,
   });
 
   await client.connect();
