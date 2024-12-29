@@ -1,13 +1,12 @@
 import NextAuth from "next-auth";
-import { authConfig } from "./auth.config";
 import Credentials from "next-auth/providers/credentials";
+import { authConfig } from "./auth.config";
 import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import bcrypt from "bcrypt";
 
-export interface User {
+interface User {
   id: string;
-  name: string;
   email: string;
   password: string;
 }
@@ -40,7 +39,7 @@ export const { auth, signIn, signOut } = NextAuth({
           if (passwordsMatch) return user;
         }
 
-        console.log("Invalid credentials");
+        console.log("Invalid credentials:");
         return null;
       },
     }),

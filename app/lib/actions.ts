@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "next-auth/react";
+import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 
 export async function authenticate(
@@ -8,11 +8,7 @@ export async function authenticate(
   formData: FormData
 ) {
   try {
-    const signInData: { [key: string]: string } = {};
-    formData.forEach((value, key) => {
-      signInData[key] = value.toString();
-    });
-    await signIn("credentials", signInData);
+    await signIn("credentials", formData);
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
