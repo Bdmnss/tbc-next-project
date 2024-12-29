@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     "A simple Next.js application with Tailwind CSS and custom fonts.",
 };
 
+export const experimental_ppr = true;
+
 export default function RootLayout({
   children,
 }: Readonly<{
