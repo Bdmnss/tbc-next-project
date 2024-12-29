@@ -1,5 +1,3 @@
-"use client";
-
 import { Suspense } from "react";
 import Image from "next/image";
 import Loading from "@/components/Loading";
@@ -7,12 +5,15 @@ import UsersList from "@/components/UsersList";
 import Search from "@/components/Search";
 import Pagination from "@/components/Pagination";
 import UserForm from "@/components/UserForm";
-import { useSearchParams } from "next/navigation";
 
-export default function Home() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get("query") || "";
-  const currentPage = Number(searchParams.get("page")) || 1;
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string>>;
+}) {
+  const params = await searchParams;
+  const query = params.query || "";
+  const currentPage = params.page ? Number(params.page) : 1;
 
   return (
     <Suspense fallback={<Loading />}>

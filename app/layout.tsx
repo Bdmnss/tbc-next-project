@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import ClientLayout from "@/components/ClientLayout";
 import "../styles/globals.css";
 import Head from "next/head";
 
@@ -30,19 +29,14 @@ export default function RootLayout({
     <html lang="en">
       <Head>
         <title>{String(metadata.title) ?? "Default Title"}</title>
-        <meta
-          name="description"
-          content={metadata.description ?? "Default description"}
-        />
+        <meta name="description" content={metadata.description ?? undefined} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        {children}
-        <Footer />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

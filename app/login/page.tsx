@@ -30,7 +30,7 @@ export default function Login() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
-          className="border p-2 rounded"
+          className="border p-2 rounded text-black"
           required
         />
         <input
@@ -38,7 +38,7 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className="border p-2 rounded"
+          className="border p-2 rounded text-black"
           required
         />
         <button type="submit" className="bg-blue-500 text-white p-2 rounded">

@@ -38,7 +38,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
       value={query}
       onChange={handleInputChange}
       placeholder={placeholder}
-      className="border p-2 rounded"
+      className="border p-2 rounded text-black"
     />
   );
 }

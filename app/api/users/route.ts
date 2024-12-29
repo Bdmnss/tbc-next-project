@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       [name, email]
     );
 
-    return NextResponse.redirect("/invoices");
+    return NextResponse.json({ message: "User added successfully" });
   } catch (error) {
     console.error("Error inserting data:", error);
     return NextResponse.json(

@@ -32,7 +32,7 @@ export default function UserForm() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Name"
-        className="border p-2 rounded"
+        className="border p-2 rounded text-black"
         required
       />
       <input
@@ -40,7 +40,7 @@ export default function UserForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
-        className="border p-2 rounded"
+        className="border p-2 rounded text-black"
         required
       />
       <button type="submit" className="bg-blue-500 text-white p-2 rounded">
